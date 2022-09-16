@@ -1,5 +1,5 @@
 {
-  "name": "ubuntu",
+  "name": "cypress-e2e-framework",
   "version": "1.0.0",
   "description": "E2E Framework Testing Cypress",
   "main": "index.js",
@@ -22,9 +22,5 @@
     "cypress-grep": "^2.5.3",
     "cypress-mochawesome-reporter": "^2.2.0",
     "cypress-xpath": "^1.6.2"
-  "bugs": {
-    "url": "https://github.com/Shabnam79/cypress-POC/issues"
-  },
-  "homepage": "https://github.com/Shabnam79/cypress-POC#readme"
 }
 }
