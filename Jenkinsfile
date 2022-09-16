@@ -32,9 +32,6 @@ pipeline {
     //The options directive allows configuring Pipeline-specific options from within the Pipeline itself.
     //Pipeline provides a number of these options, such as buildDiscarder, but they may also be provided by
     //plugins, such as timestamps. Ex: retry on failure
-    options {
-        ansiColor('xterm')
-    }
 
     //The stage directive goes in the stages section and should contain a steps section, an optional agent section, 
     //or other stage-specific directives. Practically speaking, all of the real work done by a Pipeline will be wrapped
@@ -50,8 +47,8 @@ pipeline {
         
         stage('Testing') {
             steps {
-                bat "npm i"
-                bat "npx cypress run --browser ${BROWSER} --spec ${SPEC}"
+                sh "npm i"
+                sh "npx cypress run --browser ${BROWSER} --spec ${SPEC}"
             }
         }
         
