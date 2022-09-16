@@ -71,11 +71,13 @@ pipeline {
         }
         stage('Email')
         {
-        env.ForEmailPlugin = env.WORKSPACE
-        emailext mimeType: 'text/html',
-        body: '${FILE, path="myfile.html"}',
-        subject: currentBuild.currentResult + " : " + env.JOB_NAME,
-        to: 'example@example.com'
+            steps{
+                env.ForEmailPlugin = env.WORKSPACE
+                emailext mimeType: 'text/html',
+                body: '${FILE, path="myfile.html"}',
+                subject: currentBuild.currentResult + " : " + env.JOB_NAME,
+                to: 'shabnam.kumari@testingxperts.com'
+            }
         }
     }
 
