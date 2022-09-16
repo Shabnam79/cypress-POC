@@ -76,9 +76,7 @@ pipeline {
     compressLog: true,
     recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
      [$class: 'RequesterRecipientProvider']],
-    replyTo: 'shabnam.kumari@testingxperts.com', 
-    subject: "Status: ${currentBuild.result?:'SUCCESS'} 
-    Job \'${env.JOB_NAME}:${env.BUILD_NUMBER}\'", 
+    replyTo: 'shabnam.kumari@testingxperts.com',  
     to: 'shabnam.kumari@testingxperts.com'
             
             slackSend channel: '#jenkins-example',
