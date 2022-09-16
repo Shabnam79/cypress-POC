@@ -68,7 +68,18 @@ pipeline {
             script {
                 BUILD_USER = getBuildUser()
             }
-            emailext body: '', recipientProviders: [developers(), requestor()], subject: 'Test', to: 'shabnam.kumari@testingxperts.com'
+      emailext attachLog: true, body:
+   """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER})\'
+   </b></p><p>View console output at "<a href="${env.BUILD_URL}"> 
+   ${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> 
+     <p><i>(Build log is attached.)</i></p>""", 
+    compressLog: true,
+    recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+     [$class: 'RequesterRecipientProvider']],
+    replyTo: 'shabnam.kumari@testingxperts.com', 
+    subject: "Status: ${currentBuild.result?:'SUCCESS'} - 
+    Job \'${env.JOB_NAME}:${env.BUILD_NUMBER}\'", 
+    to: 'shabnam.kumari@testingxperts.com'
             
             slackSend channel: '#jenkins-example',
                 color: COLOR_MAP[currentBuild.currentResult],
