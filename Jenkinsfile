@@ -77,7 +77,7 @@ pipeline {
     recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
      [$class: 'RequesterRecipientProvider']],
     replyTo: 'shabnam.kumari@testingxperts.com', 
-    subject: "Status: ${currentBuild.result?:'SUCCESS'} - 
+    subject: "Status: ${currentBuild.result?:'SUCCESS'} 
     Job \'${env.JOB_NAME}:${env.BUILD_NUMBER}\'", 
     to: 'shabnam.kumari@testingxperts.com'
             
