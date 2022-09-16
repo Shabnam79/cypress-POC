@@ -70,6 +70,7 @@ pipeline {
             script {
                 BUILD_USER = getBuildUser()
             }
+            emailext body: '', recipientProviders: [developers(), requestor()], subject: 'Test', to: 'shabnam.kumari@testingxperts.com'
             
             slackSend channel: '#jenkins-example',
                 color: COLOR_MAP[currentBuild.currentResult],
