@@ -58,15 +58,23 @@ pipeline {
                 echo "Deploying"
             }
         }
-        stage ('email')
-    {
-        emailext (
-        subject: "some subject",
-        body: ${FILE,path="enteryPath/template.html"},
-        to: "shabnam.kumari@testingxperts.com.com"
-        )  
-
-    }
+        stage('Writing html file')
+        {
+        sh 'echo "<html>" >> myfile.html'
+        sh 'echo "<header><title> This is the title</title></header>" >> myfile.html'
+        sh 'echo "<body> how do you do? </body>" >> myfile.html'
+        sh 'echo "</html>" >> myfile.html'
+        sh 'ls -al myfile.html'
+        sh 'head -1 myfile.html'
+        }
+        stage('Email')
+        {
+        env.ForEmailPlugin = env.WORKSPACE
+        emailext mimeType: 'text/html',
+        body: '${FILE, path="myfile.html"}',
+        subject: currentBuild.currentResult + " : " + env.JOB_NAME,
+        to: 'example@example.com'
+        }
     }
 
     post {
