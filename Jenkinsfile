@@ -58,6 +58,15 @@ pipeline {
                 echo "Deploying"
             }
         }
+        stage ('email')
+    {
+        emailext (
+        subject: "some subject",
+        body: ${FILE,path="enteryPath/template.html"},
+        to: "shabnam.kumari@testingxperts.com.com"
+        )  
+
+    }
     }
 
     post {
@@ -68,17 +77,6 @@ pipeline {
             script {
                 BUILD_USER = getBuildUser()
             }
-      emailext attachLog: true, body:
-   """<p>EXECUTED: Job <b>\'${env.JOB_NAME}:${env.BUILD_NUMBER})\'
-   </b></p><p>View console output at "<a href="${env.BUILD_URL}"> 
-   ${env.JOB_NAME}:${env.BUILD_NUMBER}</a>"</p> 
-     <p><i>(Build log is attached.)</i></p>""", 
-    compressLog: true,
-    recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
-     [$class: 'RequesterRecipientProvider']],
-    replyTo: 'shabnam.kumari@testingxperts.com',  
-    to: 'shabnam.kumari@testingxperts.com'
-            
             slackSend channel: '#jenkins-example',
                 color: COLOR_MAP[currentBuild.currentResult],
                 message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} by ${BUILD_USER}\n Tests:${SPEC} executed at ${BROWSER} \n More info at: ${env.BUILD_URL}HTML_20Report/"
