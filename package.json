@@ -17,7 +17,7 @@
     "framework",
     "cypress"
   ],
-  "author": "joanmedia",
+  "author": "POC",
   "license": "ISC",
   "devDependencies": {
     "cypress": "^9.1.1",
